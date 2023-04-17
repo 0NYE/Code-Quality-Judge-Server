@@ -1,0 +1,17 @@
+{
+  "name": "code-quality-judge-server",
+  "version": "1.0.0",
+  "description": "lighthouse 등을 이용해 html, css, js 코드 퀄리티를 검사합니다.",
+  "main": "dist/index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/0NYE/Code-Quality-Judge-Server.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/0NYE/Code-Quality-Judge-Server/issues"
+  },
+  "homepage": "https://github.com/0NYE/Code-Quality-Judge-Server#readme"
+}
