@@ -13,5 +13,8 @@
   "bugs": {
     "url": "https://github.com/0NYE/Code-Quality-Judge-Server/issues"
   },
-  "homepage": "https://github.com/0NYE/Code-Quality-Judge-Server#readme"
+  "homepage": "https://github.com/0NYE/Code-Quality-Judge-Server#readme",
+  "devDependencies": {
+    "prettier": "^2.8.7"
+  }
 }
