@@ -4,8 +4,8 @@
   "description": "lighthouse 등을 이용해 html, css, js 코드 퀄리티를 검사합니다.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "esbuild src/index.ts --platform=node --target=node18.15.0 --external:express --bundle --minify --outdir=dist",
-    "esbuild-watch": "esbuild src/index.ts --platform=node --target=node18.15.0 --external:express --bundle --minify --outdir=dist --watch",
+    "build": "node ./esbuild/build.mjs",
+    "esbuild-watch": "node ./esbuild/watch.mjs",
     "nodemon-output": "nodemon --watch dist/ dist/index.js",
     "dev": "concurrently \"npm run nodemon-output\"  \"npm run esbuild-watch\"",
     "lint": "eslint .",
