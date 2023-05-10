@@ -4,7 +4,7 @@ const buildOptions = {
   target: "node18.15.0",
   bundle: true,
   minify: true,
-  external: ["express", "multer"],
+  external: ["express", "multer", "cors"],
   outdir: "dist",
 };
 
