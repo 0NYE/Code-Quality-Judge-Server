@@ -14,6 +14,8 @@ const app = express();
 
 app.use(cors());
 
+app.use(express.static("webapp"));
+
 app.use("/api/judge", judgeRouter)
 
 app.get("*", (req: Request, res: Response) => {
