@@ -1,7 +1,14 @@
+import * as fs from "fs";
+
 import cors from "cors";
 import express, { Request, Response } from "express";
 
 import judgeRouter from "@/routers/judgeRouter";
+
+const webpappFolderPath = "./webapp";
+if (!fs.existsSync(webpappFolderPath)) {
+  fs.mkdirSync(webpappFolderPath);
+}
 
 const app = express();
 
