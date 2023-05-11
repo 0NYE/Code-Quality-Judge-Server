@@ -2,11 +2,21 @@ import express from "express";
 import multer from "multer";
 
 import { judgeWebApp } from "@/controllers/judgeController";
+import { setRequestId } from "@/middlewares/id";
 
 const judgeRouter = express.Router();
 
+const storage = multer.diskStorage({
+  destination: function (req, file, callback) {
+    callback(null, "webapp");
+  },
+  filename: function (req, file, callback) {
+    callback(null, `${req.id}.${file.fieldname}`);
+  },
+});
+
 const webappMulter = multer({
-  dest: "webapp/",
+  storage: storage,
 });
 
 const webappFields = webappMulter.fields([
@@ -15,6 +25,6 @@ const webappFields = webappMulter.fields([
   { name: "js", maxCount: 1 },
 ]);
 
-judgeRouter.post("/", webappFields, judgeWebApp);
+judgeRouter.post("/", setRequestId, webappFields, judgeWebApp);
 
 export default judgeRouter;
