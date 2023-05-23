@@ -1,5 +1,7 @@
 import * as chromeLauncher from "chrome-launcher";
 
+import { lighthouseConfig } from "@/constants/lighthouse";
+
 export const judgeWebApp = async (url: string) => {
   const chrome = await chromeLauncher.launch({ chromeFlags: ["--headless"] });
   const lighthouse = (await import("lighthouse")).default;
@@ -10,12 +12,6 @@ export const judgeWebApp = async (url: string) => {
       logLevel: "info",
       port: chrome.port,
     },
-    {
-      extends: "lighthouse:default",
-      settings: {
-        locale: "ko",
-        onlyCategories: ["accessibility"],
-      },
-    }
+    lighthouseConfig,
   );
 };
