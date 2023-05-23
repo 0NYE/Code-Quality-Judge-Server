@@ -1,12 +1,14 @@
 import * as chromeLauncher from "chrome-launcher";
+// eslint-disable-next-line import/named
+import { Result } from "lighthouse";
 
-import { lighthouseConfig } from "@/constants/lighthouse";
+import { lighthouseConfig, nedlessLhrProperties } from "@/constants/lighthouse";
 
 export const judgeWebAppLighthouse = async (url: string) => {
   const chrome = await chromeLauncher.launch({ chromeFlags: ["--headless"] });
   const lighthouse = (await import("lighthouse")).default;
 
-  return (await lighthouse(
+  const lighthouseReport = (await lighthouse(
     url,
     {
       logLevel: "info",
@@ -15,5 +17,11 @@ export const judgeWebAppLighthouse = async (url: string) => {
     lighthouseConfig,
   ))?.lhr;
 
-  
+  if (lighthouseReport) {
+    for (const lhrProperty of nedlessLhrProperties) {
+      delete lighthouseReport[lhrProperty as keyof Result];
+    }
+  }
+
+  return lighthouseReport;
 };

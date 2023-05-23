@@ -36,3 +36,24 @@ export const lighthouseConfig: Config = {
     ],
   },
 };
+
+export const nedlessLhrProperties = [
+  "lighthouseVersion",
+  "requestedUrl",
+  "mainDocumentUrl",
+  "finalDisplayedUrl",
+  "finalUrl",
+  "fetchTime",
+  "gatherMode",
+  "runWarnings",
+  "userAgent",
+  "environment",
+  "categoryGroups",
+  "stackPacks",
+  "fullPageScreenshot",
+  "timing",
+  "i18n",
+  "icuMessagePaths",
+  "configSettings",
+  "entities",
+];
