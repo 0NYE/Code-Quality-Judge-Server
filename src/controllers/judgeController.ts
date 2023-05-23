@@ -3,9 +3,9 @@ import { Request, Response } from "express";
 import * as JudgeService from "@/services/judgeService";
 
 export const judgeWebApp = async (req: Request, res: Response) => {
-  const result = await JudgeService.judgeWebApp(`http://localhost:3000/${req.id}.html`);
+  const lighthouseReport = await JudgeService.judgeWebAppLighthouse(`http://localhost:3000/${req.id}.html`);
 
-  if (!result) {
+  if (!lighthouseReport) {
     return res.status(500).json({
       result: "fail",
     })
@@ -13,6 +13,6 @@ export const judgeWebApp = async (req: Request, res: Response) => {
 
   return res.status(200).json({
     result: "sucess",
-    report: JSON.stringify(result.lhr),
+    report: JSON.stringify(lighthouseReport),
   })
 };
