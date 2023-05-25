@@ -4,8 +4,8 @@
   "description": "lighthouse 등을 이용해 html, css, js 코드 퀄리티를 검사합니다.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "esbuild src/index.ts --platform=node --target=node18.15.0 --external:express --bundle --minify --outdir=dist",
-    "esbuild-watch": "esbuild src/index.ts --platform=node --target=node18.15.0 --external:express --bundle --minify --outdir=dist --watch",
+    "build": "node ./esbuild/build.mjs",
+    "esbuild-watch": "node ./esbuild/watch.mjs",
     "nodemon-output": "nodemon --watch dist/ dist/index.js",
     "dev": "concurrently \"npm run nodemon-output\"  \"npm run esbuild-watch\"",
     "lint": "eslint .",
@@ -22,7 +22,10 @@
   },
   "homepage": "https://github.com/0NYE/Code-Quality-Judge-Server#readme",
   "devDependencies": {
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.17",
+    "@types/multer": "^1.4.7",
+    "@types/uuid4": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^5.59.0",
     "@typescript-eslint/parser": "^5.59.0",
     "concurrently": "^8.0.1",
@@ -33,6 +36,11 @@
     "prettier": "^2.8.7"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "chrome-launcher": "^0.15.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "lighthouse": "^10.2.0",
+    "multer": "^1.4.5-lts.1",
+    "uuid4": "^2.0.3"
   }
 }
