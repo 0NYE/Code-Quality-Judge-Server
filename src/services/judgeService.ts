@@ -2,6 +2,8 @@ import * as chromeLauncher from "chrome-launcher";
 // eslint-disable-next-line import/named
 import { Result } from "lighthouse";
 
+import * as fs from "fs";
+
 import { lighthouseConfig, nedlessLhrProperties, lhrAuditKoreanTranslate } from "@/constants/lighthouse";
 
 export const judgeWebAppLighthouse = async (url: string) => {
@@ -12,6 +14,7 @@ export const judgeWebAppLighthouse = async (url: string) => {
     url,
     {
       logLevel: "info",
+      output: "html",
       port: chrome.port,
     },
     lighthouseConfig,
