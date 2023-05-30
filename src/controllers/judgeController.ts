@@ -7,7 +7,7 @@ import * as JudgeService from "@/services/judgeService";
 const fileTypes = ["html", "css", "js"];
 
 export const judgeWebApp = async (req: Request, res: Response) => {
-  const lighthouseReport = await JudgeService.judgeWebAppLighthouse(
+  const [lighthouseLhr, lighthouseReport] = await JudgeService.judgeWebAppLighthouse(
     `http://localhost:3000/${req.id}.html`
   );
 
@@ -26,6 +26,7 @@ export const judgeWebApp = async (req: Request, res: Response) => {
 
   return res.status(200).json({
     result: "sucess",
-    report: JSON.stringify(lighthouseReport),
+    report: JSON.stringify(lighthouseLhr),
+    html: lighthouseReport,
   });
 };

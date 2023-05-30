@@ -8,27 +8,32 @@ export const judgeWebAppLighthouse = async (url: string) => {
   const chrome = await chromeLauncher.launch({ chromeFlags: ["--headless"] });
   const lighthouse = (await import("lighthouse")).default;
 
-  const lighthouseReport = (await lighthouse(
+  const result = (await lighthouse(
     url,
     {
       logLevel: "info",
       port: chrome.port,
     },
     lighthouseConfig,
-  ))?.lhr;
+  ));
+
+  const lighthouseLhr = result?.lhr;
+  const lighthouseReport = result?.report;
+
+  if (!lighthouseLhr || !lighthouseReport) return [undefined, undefined];
 
   // lhr 객체 정제
-  if (lighthouseReport) {
+  if (lighthouseLhr) {
     for (const lhrProperty of nedlessLhrProperties) {
-      delete lighthouseReport[lhrProperty as keyof Result];
+      delete lighthouseLhr[lhrProperty as keyof Result];
     }
   
     for (const auditId of Object.keys(lhrAuditKoreanTranslate)) {
       const { title, description } = lhrAuditKoreanTranslate[auditId as keyof typeof lhrAuditKoreanTranslate];
-      lighthouseReport.audits[auditId].title = title;
-      lighthouseReport.audits[auditId].description = description;
+      lighthouseLhr.audits[auditId].title = title;
+      lighthouseLhr.audits[auditId].description = description;
     }
   }
 
-  return lighthouseReport;
+  return [lighthouseLhr, lighthouseReport];
 };
